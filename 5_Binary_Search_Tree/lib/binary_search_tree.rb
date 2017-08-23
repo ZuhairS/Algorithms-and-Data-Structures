@@ -31,9 +31,7 @@ class BinarySearchTree
   # helper method for #delete:
   def maximum(tree_node = @root)
     max_node = tree_node
-    until max_node.right.nil?
-      max_node = max_node.right
-    end
+    max_node = max_node.right until max_node.right.nil?
     max_node
   end
 
