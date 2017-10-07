@@ -25,9 +25,10 @@ def bs_rec(arr, target)
   elsif arr[mid] > target
     bs_rec(arr[0...mid], target)
   else
-    mid + bs_rec(arr[mid + 1..-1], target) + 1
+    bs_idx = bs_rec(arr[mid + 1..-1], target)
+    mid + bs_idx + 1 if bs_idx
   end
 end
 
 p bs_iter([2, 3, 4, 10, 40], 10)
-p bs_rec([2, 3, 4, 10, 40], 1)
+p bs_rec([2, 3, 4, 10, 40], 10)
