@@ -11,6 +11,18 @@ class Graph
     @graph[u] << v
   end
 
+  def is_cyclic?
+    set = DisjointSet.new(@vertices)
+
+    @graph.each do |u, arr|
+      arr.each do |v|
+        return true if set.connected?(u, v)
+        set.union(u, v)
+      end
+    end
+    false
+  end
+
 end
 
 class DisjointSet
@@ -37,21 +49,8 @@ class DisjointSet
 
 end
 
-def is_cyclic?(graph)
-  set = DisjointSet.new(graph.vertices)
-
-  graph.graph.each do |u, arr|
-    arr.each do |v|
-      return true if set.connected?(u, v)
-      set.union(u, v)
-    end
-  end
-  false
-end
-
 graph = Graph.new(4)
 graph.add_edge(0, 1)
 graph.add_edge(1, 2)
 graph.add_edge(2, 0)
-
-p is_cyclic?(graph)
+p graph.is_cyclic?
