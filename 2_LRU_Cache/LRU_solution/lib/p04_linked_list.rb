@@ -68,7 +68,7 @@ class LinkedList
 
     new_node
   end
-  
+
   def update(key, val)
     each do |node|
       if node.key == key
@@ -95,6 +95,25 @@ class LinkedList
       yield current_node
       current_node = current_node.next
     end
+  end
+
+  def reverse
+    original_first = first
+    pointer = @head
+    until original_first == last
+      new_last = last.prev
+      new_first = last
+
+      pointer.next = new_first
+      new_first.prev = pointer
+
+      @tail.prev = new_last
+      new_last.next = @tail
+      pointer = new_first
+    end
+
+    pointer.next = last
+    last.prev = pointer
   end
 
   def to_s

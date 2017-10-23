@@ -7,10 +7,12 @@ class LinkedList
   # ....
 
   def reverse
-    each do |node|
-      node.prev, node.next = node.next, node.prev
+    current_node = @head.next
+    until current_node == @tail
+      current_node.next, current_node.prev = current_node.prev, current_node.next
+
+      current_node = current_node.prev
     end
-    self.head, self.tail = self.tail, self.head
   end
 
 end
